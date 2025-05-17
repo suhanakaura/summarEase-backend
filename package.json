@@ -8,9 +8,8 @@
     "start": "node server.js"
   },
   "engines": {
-  "node": ">=20"
-},
-
+    "node": ">=20"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -40,6 +39,7 @@
     "path": "^0.12.7",
     "pdf-parse": "^1.1.1",
     "python-shell": "^5.0.0",
+    "translate-google": "^1.5.0",
     "unfluff": "^1.1.0",
     "winston": "^3.17.0"
   },
