@@ -5,8 +5,7 @@
   "scripts": {
     "build": "react-scripts build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "prebuild": "rimraf node_modules package-lock.json && npm install"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
