@@ -1,0 +1,1115 @@
+*********************INTRODUCTION******************
+//introduced by : bjarne stroustrope 
+//why c++: faster , more control over system resources , memory management , high performance
+#include<iostream>//header file:improves the functionality of program,helps in input/output functions
+//c++ ignores blank line
+int main(){
+    std::cout<<"hello world";//cout is in a standard name space. cout is a fn defined in iostream.namespace tells 
+    //from which header file we are using the fn. :: - scope resolution operator
+    return 0;//successful termination of the program. 0 :value sent to os
+}
+
+
+*************************OPERATORS***********************
+/*two types of header files:
+  - system header files: comes with compiler*/
+#include<iostream>
+ /* - user defined header files:written by programmar*/
+// #include "operator.h" will produce an error if operator.h isn't included in current directory
+using namespace std;
+int main(){
+    int a=2,b=4;
+    cout<<"operators in c++"<<endl;//or <<'\n';//endl will give a new line
+    //arithmetic opr
+    cout<<"a+b="<<a+b<<endl;
+    cout<<"a-b="<<a-b<<endl;
+    cout<<"a*b="<<a*b<<endl;
+    cout<<"a/b="<<a/b<<endl;
+    cout<<"a%b="<<a%b<<endl;
+    cout<<"++a="<<++a<<endl;
+    cout<<"a++="<<a++<<endl;
+    cout<<"a--="<<a--<<endl;
+    cout<<"--a="<<--a<<endl;
+    cout<<endl;
+    //int/int = int
+    // float/int = float
+    // double/int = double
+    int d = 0.4/2;//here data is stored in int 
+    cout<<d<<endl;//therefore output will be int
+    cout<<0.4/2<<endl;
+
+    /*assignment opr
+    int a= 3,b=9;
+    char d = 'd';*/
+
+    // comparison opr
+    cout<<"the value of a==b is"<<(a==b)<<endl;
+    cout<<"the value of a!=b is"<<(a!=b)<<endl;
+    cout<<"the value of a>b is"<<(a>b)<<endl;
+    cout<<"the value of a<b is"<<(a<b)<<endl;
+    cout<<"the value of a>=b is"<<(a>=b)<<endl;
+    cout<<"the value of a<=b is"<<(a<=b)<<endl;
+    cout<<endl;
+
+    //logical opr : &&,||,!
+    cout<<"((a==b)&&(a!=b)) is "<<((a==b)&&(a!=b))<<endl;
+    cout<<"((a>b)||(a<b)) is "<<((a>b)||(a<b))<<endl;
+    cout<<"(!(a==b)) is "<<(!(a==b))<<endl;
+
+}
+
+
+*****************************REFRENCE VARIABLES AND TYPE CASTING*******************
+#include<iostream>
+using namespace std;
+int c = 45;
+int main(){
+    /****************************built in data types**********************************/
+    // int a,b,c;
+    // cout<<"enter the value of a:"<<endl;
+    // cin>>a;
+    // cout<<"enter the value of b:"<<endl;
+    // cin>>b;
+    // c = a+b;
+    // cout<<"c=a+b:"<<c<<endl;
+    // cout<<"global var c is:"<<::c;//:: - scope resolution opr is used to print global variable4
+    // float d = 34.4f;
+    // long double e = 34.4l;
+
+    /***************************float, double and long double literals*******************************/
+    // 34.4 // - by default the cpp compiler treats it double 
+    // 34.4f //-if we want to specify it's a float
+    // cout<<"size of 34.4 is:"<<sizeof(34.4)<<endl;
+    // cout<<"size of 34.4l is:"<<sizeof(34.4l)<<endl;
+    // cout<<"size of 34.4L is:"<<sizeof(34.4L)<<endl;
+    // cout<<"size of 34.4f is:"<<sizeof(34.4f)<<endl;
+    // cout<<"size of 34.4F is:"<<sizeof(34.4F)<<endl;
+
+
+    /*******************************reference variables****************************************/
+    // float x = 20;
+    // float & y = x; //means y is a refernce variable that points to x
+    // cout<<x<<endl;
+    // cout<<y;
+
+    /*****************************Type casting***************************************************/
+    // int a = 45;
+    // float b = 45.67;
+    // int c = (int)b;
+    // cout<<"value of a after typecasting in float"<<float(a)<<endl;
+    // //or
+    // cout<<"value of a after typecasting in float"<<(float)a<<endl;
+    // cout<<"value of b after typecasting in int"<<int(a)<<endl;
+    // cout<<"value of c = int(b) after typecasting in int"<<c<<endl;
+
+    // cout<<"expression a+b is : "<<a+b<<endl;
+    // cout<<"expression a+int(b) is : "<<a+int(b)<<endl;
+    // cout<<"expression a+(int)b is : "<<a+(int)b<<endl;
+    // int a = 'c';
+    // cout<<a<<endl;
+    // char b = 82;
+    // cout<<b<<endl;
+    // char c = 123456;
+    // cout<<c<<endl;//we are trying to store the 4 bytes of int in 1 byte of c . here 64 will be stored which will 
+    //result in @.
+    /*HOW DATA IS STORED?
+    let we have int a=8;
+    int has size 4 bytes . 4 bytes memory is allocated. 8 is converted into binary which is 1000 that is 4 bits. We have 32 bits in total . so other byte will be allocated 0000 .i.e 0000 0000 0000 1000.
+    Integer – 4 bytes – 32 bits. Max value that can be stored is (2^32)-1 and min is 0.
+    For char it is (2^8)-1 and min is 0.
+    let there be char ch = ‘a’; its ascii value is converted into binary and then it is stored.
+*/
+/*how -ve numbers are stored?
+  our first bit will tell whether no. is +ve or -ve
+  if 0 then +ve 
+  if 1 then -ve
+  let there be a -ve no. -5
+  1. ignore the negative sign
+  2. convert it into binary which is 101
+  3. take 2's complement and store i.e take 1's complement and then add 1 to it . it's first digit i.e m.s.b. will 
+  be representing whether it's negative or positive.
+  
+  by default it's signed but if we want to store positive numbers specifically we will use unsigned.*/
+//   unsigned int a = 22;
+//   cout<<a<<endl;
+  unsigned int a = -22; //it will be a very huge value as we have declared it unsigned and compiler will treat it 
+//   as unsigned and will consider the most significant bit too.
+  cout<<a<<endl;
+
+}
+
+**********************VARIABLES AND DATA TYPES******************
+#include<iostream>
+using namespace std;
+int glo = 6;//global variable
+void sum(){
+    cout<<glo;//will look for global variable glo if there ain't any local variable in function sum() 
+}
+int main(){
+    int glo = 9;//local variable;
+    // int sum = 6;
+    int a = 10 , b = 20;
+    float d = 10.2;
+    char e = 'c'; // we can't assign double character in char eg char a = "ab";  
+    bool bl = true;
+    int size = sizeof(a);//sizeof() operator 
+    cout<<glo;//more precedence to local variable
+    cout<<"\nhello world " << sum;
+    cout<<"\nthe value of a is " <<a <<" value of b is "<<b<<"\nvalue of d is "<<d<<"\nvalue of e is "<<e<<endl;
+    cout<<bl<<endl;
+    cout<<size<<endl;
+    // cout<<"\n";
+    sum();
+}
+/*variable is a container to store data
+types :
+- int
+- float
+- char : initialised in single quotes
+- double
+- boolean
+(all built-in)
+
+syntax: 
+data_type variable_name = value
+
+scope of a variable: is the region in code where the existence of variable is valid.
+- global : are declared outside any function and can be accessed from anywhere.
+- local : are declared inside the braces of any function and can be accessed only from there.*/
+
+/*data types: define the type of data a variable can hold
+3 categories:
+- built-in
+- user-defined(struct,union,enum)
+- derived(array,function,pointer)
+*/
+
+/*rules to declare variables:
+- can range from 1 to 255 characters
+- must begin with alphabet's letter or underscore
+- case sensitive
+- no spaces no special character
+- no c++ keyword*/
+
+
+************************in - out***********************
+#include<iostream>
+using namespace std;
+int main(){
+    int num1,num2;
+    cout<<"Enter the value of num1:\n";//"<<" is known as insertion operator
+    cin>>num1;//">>"is known as extraction operator
+    cout<<"Enter the value of num2:\n";//cin doesn't read space,tab and new line.
+    cin>>num2;
+    cout<<"Sum of num1 and num2 is: "<<num1+num2;
+    int a;
+    a= cin.get();
+    cout<<a;
+}
+//cin.get() is used to take char inputs .. if we give an integer input the return value will be
+its ascii character . we can give space , tab and new line as input using cin.get()
+
+***************************conditionals*********************
+#include<iostream>
+using namespace std;
+int main(){
+    /*******************************c++ control structures******************************/
+    /* -sequence structure
+       -selection structure
+       -loop structure*/
+
+    /*if-else(selection structure)*/
+    int age;
+    cout<<"enter age:";
+    cin>>age;
+    // if(age>=18){
+    //     cout<<"eligible";
+    // }
+    // else if(age<18){
+    //     cout<<"not eligible";4
+
+    // }
+
+    /*switch-case statement (selection structure)*/
+    switch(age){ //takes only integer or character value
+    case 18:
+        cout<<"18";
+        break;
+    case 2:
+        cout<<"2";
+        break;
+    case 22:
+        cout<<"22";
+        break;
+    default:
+        cout<<"not eligible";
+
+    }
+    // Q. int a = 2;
+    // int b = a+1;
+    // if((a=3)==b){
+    //     cout<<a;
+    // }
+    // else{
+    //     cout<<a+1;
+    //         }
+ 
+
+    // Q. int a = 24;
+    // if(a>20){
+    //     cout<<"hello";
+    // }
+    // else if(a==24){
+    //     cout<<"world";
+    // }
+    // else{
+    //     cout<<"!";
+    // }
+    // cout<<a;
+
+    // Q. int a = 9;
+    // if(a==9){
+    //     cout<<"nine";
+    // }
+    // if(a>0){
+    //     cout<<"+ve";
+    // }
+    // else{
+    //     cout<<"-ve";
+    // }
+    char a ;
+    // cin>>a;
+    // if(a>='a' && a<='z'){
+    //     cout<<"lowercase"<<endl;
+    // }
+    // else if(a>='A' && a<='Z'){
+    //     cout<<"Uppercase"<<endl;
+    // }
+    // else if(a>='0' && a<='9'){
+    //     cout<<"numeric"<<endl;
+    // }
+    
+//nested switch
+    // int num = 1;
+    // char ch = '1';
+    // switch(ch){
+    //     case '1':switch(num){
+    //         case 1: cout<<"number is "<<num;
+    //     } 
+    //     break;
+    //     case '2':cout<<"2";
+    //     break;
+    //     default:cout<<"hello world";
+    // }
+
+//we are having a switcc case in  an infinte loop and we have to come out of the loop using exit()
+    // int num;
+    // while(1){
+    //     cin>>num;
+    //     switch(num){
+    //         case 1 : cout<<1<<endl;
+    //         break;
+    //         case 2: exit(2);
+    //         break;
+    //     }
+    // }
+
+//we don't use continue in switch , can only be used in loop
+
+//calculator
+    // int num,num1,num2;
+    // cin>>num>>num1>>num2;
+    // switch(num){
+    //     case 1: cout<<num1+num2;
+    //     break;
+    //     case 2: cout<<num1-num2;
+    //     break;
+    //     case 3:cout<<num1*num2;
+    //     break;
+    //     case 4:cout<<num1/num2;
+    //     break;
+    //     default:cout<<"no such opn.";
+    // }
+
+//or 
+
+    // int num1;
+    // cin >> num1;
+    // int num2;
+    // cin>>num2;
+    // char ch;
+    // cin>> ch;
+    // switch(ch){
+    //     case '+': cout<<num1+num2;
+    //     break;
+    //     case '-': cout<<num1-num2;
+    //     break;
+    //     case '*':cout<<num1*num2;
+    //     break;
+    //     case '/':cout<<num1/num2;
+    //     break;
+    //     default:cout<<"no such opn.";
+    // }
+
+// .....
+    int num;
+    cin>>num;
+    switch(2*num){
+        case 2:cout<<"2";
+        break;
+        case 4:cout<<"4";
+        break;
+        case 6:cout<<"6";
+        break;
+    }
+
+}
+
+// nth fibonacci number
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n;
+    cin>>n;
+    int a=0,b=1,sum;
+    for(int i = 1;i<n-1;i++){
+        int sum = a+b;
+        a = b;
+        b = sum;
+    }
+    if(n==1){
+        cout<<"0";
+    }
+    else if(n==2){
+        cout<<"1";
+    }
+    else{
+    cout<<b;
+    }
+
+    return 0;
+}
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int money,note=0;
+    cin>>money;
+    // while(money!=0){
+        if(money>=100){
+            int note100 = money/100;
+            cout<<"100 RS. notes = "<<note100<<endl;
+            money=money - (note100*100);
+        }
+        else{
+            int note100=0;
+            cout<<"100 RS. notes = "<<note100<<endl;
+        }
+        if(money>=50){
+            int note50 = money/50;
+            cout<<"50 RS. notes = "<<note50<<endl;
+            money=money - (note50*50);
+        }
+        else{
+            int note50=0;
+            cout<<"50 RS. notes = "<<note50<<endl;
+        }
+        if(money>=20){
+            int note20 = money/20;
+            cout<<"20 RS. notes = "<<note20<<endl;
+            money=money - (note20*20);
+        }
+        else{
+            int note20=0;
+            cout<<"20 RS. notes = "<<note20<<endl;
+        }
+        if(money>=10){
+            int note10 = money/10;
+            cout<<"10 RS. notes = "<<note10<<endl;
+            money=money - (note10*10);
+        }
+        else{
+            int note10=0;
+            cout<<"10 RS. notes = "<<note10<<endl;
+        }
+        if(money>=1){
+            cout<<"1 RS. note = "<<money;
+        }
+    // }
+
+    return 0;
+}
+
+***************************************loops*************************************
+#include<iostream>
+using namespace std;
+int main(){
+    /****************************for loop***************************/
+    /*for(initialisation;condition;updation){
+        code
+    }*/
+    // int n;
+    // cin>>n;
+    // for(int i=0;i<=n;i++){
+    //     cout<<i<<endl;
+    // }
+//or
+    // int i =0;
+    // for(;;){
+    //     if(i<=5){
+    //         cout<<i<<endl;
+    //         i++;
+    //     }
+    //     else{
+    //         break;
+    //     }
+    // }
+//we can initialize 2 variables in a single for loop statement
+    // for(int a=0,b=1;a<=5 && b<=6;a++,b++){
+    //     cout<<a<<" "<<b<<endl;
+    // }
+
+//fibonacci series
+// int a = 0,b=1;
+// int n;
+// cin>>n;
+// cout<<a<<" "<<b<<" ";
+// for(int i =0;i<n-1;i++){
+//     int sum = a+b;
+//     a = b;
+//     b = sum;
+//     cout<<b<<" ";
+// }
+
+//q1.
+// for(int i=0;i<=5;i++){
+//     cout<<i<<" ";
+//     i++;
+// }
+
+//q2
+// for(int i=0;i<=5;i--){
+//     cout<<i<<" ";
+//     i++;
+// }
+
+//q3
+// for(int i=0;i<=15;i+=2){
+//     cout<<i<<" ";
+//     if(i&1){
+//         continue;
+//     }
+//     i++;
+// }
+
+//q4
+// for(int i=0;i<5;i++){
+//     for(int j=i;j<=5;j++){
+//         cout<<i<<" "<<j<<endl;
+//     }
+// }
+
+//q5
+// for(int i=0;i<5;i++){
+//     for(int j=i;j<=5;j++){
+//         if(i+j==10){
+//             break;
+//         }
+//         cout<<i<<" "<<j<<endl;
+//     }
+// }
+
+
+
+    /************************while loop*****************************/
+    /*while(condition){
+        code
+    }*/
+    // int i=1;
+    // while(i<=n){
+    //      cout<<i<<endl;
+    //      i++;
+    // }
+
+    /************************do while loop**************************/
+    /*do{
+        code
+    }while(condition);*/
+    // int i=1;
+    // do{
+    //     cout<<n<<"*"<<i<<"="<<n*i<<endl;
+    //     i++;
+    // }while(i<=10);
+
+    // sum of even numbers
+    // int j=2;
+    // while(j<=n){
+    //         cout<<j<<" ";
+    //         j=j+2; 
+    // }
+
+    //fahrenheit to celsius table
+    // int f;
+    // cin>>f;
+    // int c = (f-32)*(5/9);
+    // cout<<c;
+
+    //prime or not
+//     void isprime(int n){
+//     int i=2;
+//     bool flag = true;
+//     if(n==2){
+//         cout<<"prime";
+//     }
+//     while(i<n){
+//         if(n%i==0){
+//             // cout<<"not prime"<<endl;
+//             cout<<"not prime";
+//             break;
+//         }
+//         else{
+//             flag = false;
+//         }
+//         i=i+1;
+//     }
+//     if(flag==false){
+//         cout<<"prime";
+//     }
+    
+// }
+// int main()
+// {
+//     int n;
+//     cin>>n;
+//     for(int i = 2;i<=n;i++){
+//     cout<<i<<" is ";
+//     isprime(i);
+//     cout<<endl;
+//     }
+
+// 1 2 3 4 
+// 1 2 3 4 
+// 1 2 3 4 
+// 1 2 3 4
+// int main(){
+//     int n;
+//     cin>>n;
+//     int i=1;
+//     while(i<=n){
+//         int j=1;
+//         while(j<=n){
+//             cout<<j<<" ";
+//             j++;
+//         }
+//         i++;
+//         cout<<endl;
+//     }
+
+}****************break continue*************************************
+#include<iostream>
+using namespace std;
+int main(){
+    int i ;
+    for(i=1;i<=40;i++){
+        cout<<i<<endl;
+        if(i==2){
+            break;
+        }
+    }
+    cout<<endl;
+    for(i=1;i<=40;i++){
+        if(i==2){
+            break;
+        }
+         cout<<i<<endl;
+    }
+    cout<<endl;
+    for(i=1;i<=40;i++){
+        
+        if(i==2){
+            continue;
+        }
+        cout<<i<<endl;
+    }
+    cout<<endl;
+    return 0;
+}
+
+
+#include<iostream>
+#include<iomanip>
+using namespace std;
+int main(){
+    /*******************constant***************************/
+    // const int a = 34;//we can't change its value
+    // a = 65;//will give an error
+    // cout<<a;
+
+    /****************************manipulators****************************/
+    //used to format data. controls data display
+    //eg. endl - in iostream header file
+    //eg. setw() - in iomanip header file : sets the field width
+    // int a = 23 , b= 546, c=1233;
+    
+    // cout<<"value of a is"<<a<<endl;
+    // cout<<"value of b is"<<b<<endl;
+    // cout<<"value of c is"<<c<<endl;
+
+    // cout<<"value of a is"<<setw(5)<<a<<endl;
+    // cout<<"value of b is"<<setw(5)<<b<<endl;
+    // cout<<"value of c is"<<setw(5)<<c<<endl;
+
+    /***********************************operators precedence****************************/
+    //post increment>preincrement
+    int a= 4,b=8;
+    int c= a*5+b;
+    cout<<c;
+
+
+
+}
+
+ /*************************************bitwise operators********************************/
+   /*and - &
+   or - |
+   not - ~ 
+   not - eg we have 4 and we need to find ~4 then we first convert 4 to binary and then take its complement
+   to print that no. in decimal we will take first digit to represent the sign and take 2's complement of rest
+   of digits.
+   i.e ~4 is -5.
+   '1' is also known as 'set bit'
+   xor - ^
+   left shift - << 
+   eg 3<<2 will shift 3 (binary) left two times 011 wil be shifted and become 01100 which is 12
+   in some cases it can create a negative number(in case of large numbers)
+   multiply the number by 2 or the number how many times it has been shifted
+
+   right shift ->>
+   eg  15>>2 will shift right 2 times .divide the number by 2 or the number how many times it has been shifted
+
+   whenever we are left or right shifting any positive number, padding is always with 0.means the bits in place
+   of the bits shifted will be 0.
+   but in case of negative no. the padding is compiler dependent.
+   */
+//    cout<<"a&b = "<< (a&b) <<endl;
+//    cout<<"a|b = "<< (a|b) <<endl;
+//    cout<<"~b = "<< (~b) <<endl;
+//    cout<<"a^b = "<< (a^b) <<endl;
+//    cout<<"17>>1 = "<<(17>>1)<<endl;
+//    cout<<"21>>2 = "<<(21<<2)<<endl;
+
+// q1.
+// int a ,b=1;
+// a=10;
+// if(++a){
+//     cout<<b;
+// }
+// else{
+//     cout<<++b;
+// }
+
+// q2.
+// int a = 1;
+// int b = 2;
+// if(a-- >0 && ++b >2){
+//     cout<<"stage1 - insideif";
+// }
+// else{
+//     cout<<"stage2 - inside else";
+// }
+// cout<<a<<" "<<b<<endl;
+
+//q3. 
+// int a = 1;
+// int b = 2;
+// if(++b >2||a-- >0 ){
+//     cout<<"stage1 - insideif";
+// }
+// else{
+//     cout<<"stage2 - inside else";
+// }
+// cout<<a<<" "<<b<<endl;
+
+//q4
+// int number = 3;
+// cout<<(25*(++number));
+
+//q5
+// int a = 1;
+// int b = a++;
+// int c = ++a;
+// cout<<b;
+// cout<<c;
+
+
+
+}
+
+// given a number . provide the difference in the product and sum of its digits
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int num;
+    cin>>num;
+    int pro = 1;
+    int sum = 0;
+    while(num!=0){
+        int mod = num%10;
+        pro = pro * mod;
+        sum = sum + mod;
+        num = num/10;
+        
+    }
+    cout<<pro - sum;
+
+    return 0;
+}
+
+//print the number of 1 bit in a binary number
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int num;
+    cin>>num;
+    int count =0;
+    while(num!=0){
+        int mod = num%10;
+        if(mod==1){
+            count+=1;
+        }
+        num=num/10;
+    }
+    cout<<count;
+
+    return 0;
+}
+
+or
+by inputing decimal number
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int num;
+    cin>>num;
+    int count =0;
+    while(num!=0){
+        if(num&1){
+            count++;
+        }
+        num=num>>1;
+    }
+    cout<<count;
+
+    return 0;
+}
+
+//for reverse ans = (digit*10^i)+ans
+  to form number from digits ans = (ans*10)+digit
+
+//binary to decimal
+
+#include <iostream>
+#include<math.h>
+
+using namespace std;
+
+int main()
+{
+    int num;
+    cin>>num;
+    int a = 0 ,i=0;
+    int count = 0;
+    while(num!=0){
+        int mod = num%10;
+        a = a + ((pow(2,i))*mod);
+        i++;
+        num=num/10;
+    }
+    cout<<a;
+
+    return 0;
+}
+
+//decimal to binary
+
+#include <iostream>
+#include<math.h>
+
+using namespace std;
+
+int main()
+{
+    int num;
+    cin>>num;
+    int a=0;
+    int i=0;
+    while(num!=0){
+        int bit = num&1;
+        a = a + ((pow(10,i))*bit);
+        i++;
+        num=num>>1;
+    }
+    cout<<a;
+
+    return 0;
+}
+or 
+
+#include <iostream>
+#include<math.h>
+
+using namespace std;
+
+int main()
+{
+    int num;
+    cin>>num;
+    int a[10];
+    int i=0;
+    while(num!=0){
+        int mod = num%2;
+        num=num/2;
+        a[i]=mod;
+        i++;
+    }
+    for(int j = i-1;j>=0;j--){
+        cout<<a[j];
+    }
+    // cout<<a;
+
+    return 0;
+}
+
+/*********************************functions*******************************/
+
+#include<iostream>
+using namespace std;
+// function prototype
+// type function-name(arguments);
+// int sum(int a,int b)--acceptable
+// int sum(int,int)--acceptable
+// int sum(int a,b)--not acceptable
+// int sum(int a,int b);
+// void g(void);//returns nothing
+//or void g();
+
+//function to calculate a raised to power b
+// int power(int a,int b){ //fn signature
+//fn body
+//     int i,ans=1;   
+//     for(i=1;i<=b;i++){
+//         ans = ans*a;
+//     }
+//     return ans;
+// }
+
+//even odd  function
+// void evenodd(int a){
+//     if(a%2==0){
+//         cout<<"even number";
+//     }
+//     else{
+//         cout<<"odd number";
+//     }
+// }
+
+//or
+// bool evodd(int a){
+//     //1-even , 0-odd
+//     if(a&1){
+//         return 0;//odd
+//     }
+//     return 1;
+// }
+
+//combination nCr
+// int comb(int num){
+//       int fact=1;
+//       for(int i=1;i<=num;i++){
+//         fact = fact*i;
+//       }
+//       if(num==0){
+//         return 1;
+//       }
+//       return fact;
+// }
+
+//counting function
+// void count(int n){
+//      for(int i=0;i<=n;i++){
+//         cout<<i<<endl;
+//      }
+// }
+
+//function to check prime
+// void isprime(int num){
+//     int check = 1;
+//     if(num==2){
+//         check =1;
+//     }
+    
+//     for(int i=2;i<num;i++){
+//         if(num%i==0){
+//             check =0;
+//             break;
+//         }
+//         else{
+//         check = 1;
+//         }
+//     }
+//     if(num==1){
+//         cout<<"neither prime nor composite";
+        
+//     }
+//     else if(check == 1){
+//         cout<<"prime";
+//     }
+//     else if(check==0)
+//     {
+//          cout<<"not prime";
+//     }
+// }
+
+// void dummy(int n){
+//     n++;//updating this value will not make any change in main fn's n
+//     cout<<n<<endl;
+// }
+
+
+// int main(){
+    /*function: useful in top-down structured programming*/
+    // int num1,num2;
+    // cout<<"enter num1:"<<endl;
+    // cin>>num1>>num2;
+    // cout<<"enter num2:"<<endl;
+    // cin>>num2;
+    // cout<<"sum is "<< sum(num1,num2); // num1 and num2 are actual parameters - passed to function
+    // g();
+
+    //calling power function
+    // int num1,num2;
+    // cin>>num1>>num2;
+    // cout<<num1<<"**"<<num2<<" is "<<power(num1,num2);
+
+    //calling evenodd fn
+    // int num;
+    // cin>>num;
+    // evenodd(num);
+    //or
+    // int num;
+    // cin>>num;
+    // if(evodd(num)){
+    //     cout<<"even number";
+    // }
+    // else{
+    //     cout<<"odd number";
+    // }
+
+    //calling combination function
+    // int n,r;
+    // cin>>n>>r;
+    // int ans = comb(n)/(comb(r)*comb(n-r));
+    // cout<<ans;
+
+    // calling count fn
+    // int num;
+    // cin>>num;
+    // count(num);
+
+    // calling isprime() fn
+    // int num;
+    // cin>>num;
+    // isprime(num);
+
+    //calling dummy fn
+    // int n;
+    // cin>>n;
+    // dummy(n);//this will pass a copy of n to dummy fn i.e pass by value
+    // cout<<n;//will not print the updated value
+//     return 0;
+// }
+// int sum(int a,int b){ // a and b are formal parameters - made in our function
+// a and b will be taking values from actual parameters
+//     int c = a+b;
+//     return c;
+// }
+// void g(){
+//     cout<<"hello!";
+// }
+
+
+//q1
+// void update (int a){
+//     a=a/2;
+// }
+// int main(){
+//     int a = 10;
+//     update(a);
+//     cout<<a<<endl;
+// }
+
+//q2
+// int update (int a){
+//     a-=5;
+//      return a;   
+// }
+// int main(){
+//     int a = 15;
+//     update(a);
+//     cout<<a<<endl;
+// }
+
+
+//q3
+// int update (int a){
+//     int ans = a*a;
+//      return ans;   
+// }
+// int main(){
+//     int a = 14;
+//     a= update(a);
+//     cout<<a<<endl;
+// }
+
+//number of set bits in a and b
+#include <iostream>
+
+using namespace std;
+int setbit(int n){
+    int count =0;
+    while(n!=0){
+        if(n&1){
+            count+=1;
+        }
+        n=n>>1;
+    }
+    return count;
+}
+int main()
+{
+    int a,b;
+    cin>>a>>b;
+    cout<<setbit(a)+setbit(b);
+    
+    return 0;
+}
+
+

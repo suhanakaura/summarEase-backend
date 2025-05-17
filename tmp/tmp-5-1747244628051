@@ -1,0 +1,93 @@
+basic syntax:
+begin
+dbms_output.put_line('message');
+end;
+
+to view output:
+set serveroutput on
+
+program to check even odd:
+declare 
+a number := 27;
+begin
+if mod(a,2)=0 then
+	dbms_output.put_line('even');
+else
+	dbms_output.put_line('odd');
+end if;
+end;
+
+creating a function:
+create or replace function fn_name
+(parameter - in/out/in out type)
+return dt
+in 
+begin
+function body
+end fn_name;
+
+function to calculate square:
+create or replace function sq
+(num number)
+return number
+is
+declare 
+square number;
+begin
+square := num*num;
+return square;
+end;
+
+call the above function:
+declare 
+square  number:=2;
+result number;
+begin
+result := sq(square);
+dbms_output.put_line(result);
+end;
+
+basic loop
+declare 
+a number=1;
+begin
+loop 
+	a:=a+10;
+        dbms_output.put_line(number);
+        if a>50;
+        exit;
+        end if;
+end loop;
+end;
+
+while loop
+declare 
+a number :=10;
+begin
+while a<10 loop
+dbms_output.put_line(a);
+a:=a+2;
+end loop;
+end;
+
+declare 
+i number;
+begin
+for i in 1..10 loop
+dbms_output.put_line(i);
+end loop;
+end;
+
+declare 
+j number;
+i number;
+begin
+<<outer loop>>
+for i in 1..10 loop
+<<inner loop>>
+for j in 1..10 loop
+dbms_output.put_line(i*j);
+end loop inner loop;
+end loop outer loop;
+end;
+

@@ -1,0 +1,349 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+  int *keys; //value
+  int t; //order of tree
+  Node **C; //har num ki alg individual id h..dono ko trigger krne k lie ek node kaam ayegi(common address uske pass rhega) ye kisi child ka address lega
+  int n; //kisi ek node k andr kitni values h
+  bool leaf; //node should be inserted at leaf node . agr leaf ki value true h to isi node m insert hojega otherwise agli node p add hoga
+
+   public:
+  Node(int _t, bool _leaf);
+
+  //code ki readability k lie(only declared)
+  void insertNonFull(int k);
+  void splitChild(int i, Node *y);
+  void traverse();
+
+  friend class BTree;
+};
+
+class BTree {
+  Node *root;
+  int t; //order of tree
+
+   public:
+  BTree(int _t) {
+    root = NULL;
+    t = _t;
+  }
+
+  void traverse() {
+    if (root != NULL)
+      root->traverse();
+  }
+
+  void insert(int k);
+};
+
+Node::Node(int t1, bool leaf1) {
+  t = t1;
+  leaf = leaf1;
+
+  keys = new int[2 * t - 1]; //int ek class h . int * keys 1 address store krrha th . pointer array whose size is 2t-1
+  C = new Node *[2 * t]; //no of children = number of keys + 1 i.e 2t-1+1 = 2t
+
+  n = 0; //sirf node construct hua h data enter ni hua h ..so no of values initially is 0 . 
+}
+
+// Traverse the nodes
+void Node::traverse() {
+  int i;
+  for (i = 0; i < n; i++) {
+    if (leaf == false)
+      C[i]->traverse();
+    cout << " " << keys[i];
+  }
+
+  if (leaf == false)
+    C[i]->traverse();
+}
+
+// Insert the node
+void BTree::insert(int k) { //ya to nya node bnra ho ya phir node full hogya ho tbhi ye function use hoga
+  if (root == NULL) {
+    root = new Node(t, true);
+    root->keys[0] = k; //array k index 0 p data k insert krdo
+    root->n = 1; //ek data enter ho chuka h
+  } else {
+    if (root->n == 2 * t - 1) { //if root m values 2t-1 k equal h
+      Node *s = new Node(t, false);
+
+      s->C[0] = root;
+
+      s->splitChild(0, root);
+
+      int i = 0;
+      if (s->keys[0] < k)
+        i++;
+      s->C[i]->insertNonFull(k);
+
+      root = s;
+    } else
+      root->insertNonFull(k);
+  }
+}
+
+// Insert non full condition
+void Node::insertNonFull(int k) {
+  int i = n - 1; //initialize value of i .. nya data existing k left ya right m ayega ..  iteration k lie 'i' 
+
+  if (leaf == true) {
+    while (i >= 0 && keys[i] > k) { //this while loop is used for shifting and making the node in ascending order
+      keys[i + 1] = keys[i];
+      i--;
+    }
+
+    keys[i + 1] = k; //this is used to add new number to array
+    n = n + 1; //values added so n is incremented
+  } else {
+    while (i >= 0 && keys[i] > k)
+      i--;
+
+    if (C[i + 1]->n == 2 * t - 1) {
+      splitChild(i + 1, C[i + 1]);
+
+      if (keys[i + 1] < k)
+        i++;
+    }
+    C[i + 1]->insertNonFull(k);
+  }
+}
+
+// split the child
+void Node::splitChild(int i, Node *y) { //i is denoting index number of child node
+  Node *z = new Node(y->t, y->leaf);
+  z->n = t - 1;
+
+  for (int j = 0; j < t - 1; j++)
+    z->keys[j] = y->keys[j + t];
+
+  if (y->leaf == false) {
+    for (int j = 0; j < t; j++)
+      z->C[j] = y->C[j + t];
+  }
+
+  y->n = t - 1;
+  for (int j = n; j >= i + 1; j--)
+    C[j + 1] = C[j];
+
+  C[i + 1] = z;
+
+  for (int j = n - 1; j >= i; j--)
+    keys[j + 1] = keys[j];
+
+  keys[i] = y->keys[t - 1];
+  n = n + 1;
+}
+
+int main() {
+  
+   BTree t(3); //3 is the order of tree
+  
+  t.insert(10);
+  t.insert(20);
+  t.insert(5);
+  t.insert(6);
+  t.insert(12);
+  t.insert(30);
+  t.insert(7);
+  t.insert(17);
+
+  
+  
+  cout << "The B-tree is: ";
+  t.traverse();
+}
+
+
+
+import React, { useContext, useState } from 'react';
+import myContext from '../../context/data/MyContext';
+import { Link } from 'react-router-dom';
+import { BsFillCloudSunFill } from 'react-icons/bs';
+import { FiSun } from 'react-icons/fi';
+import '../navbar/Navbar.css'
+const Navbar = () => {
+  const context = useContext(myContext);
+  const { mode, toggleMode } = context;
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div>
+      <header className="header">
+        <p className="flex h-10 items-center justify-center bg-pink-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
+          Get free delivery on orders over ₹300
+        </p>
+
+        <nav aria-label="Top" className="bg-gray-100 px-4 sm:px-6 lg:px-8 shadow-xl">
+          <div className="">
+            <div className="flex h-16 items-center">
+              <button
+                type="button"
+                className="rounded-md bg-white p-2 text-gray-400 lg:hidden"
+                onClick={() => setOpen(true)}
+              >
+                <span className="sr-only">Open menu</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+              </button>
+
+              <div className="ml-4 flex lg:ml-0">
+                <Link to={'/'} className='flex'>
+                  <div className="flex">
+                    <h1 className=' text-2xl font-bold text-black  px-2 py-1 rounded'>E-Bharat</h1>
+                  </div>
+                </Link>
+              </div>
+
+              <div className="ml-auto flex items-center">
+                <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+                  <Link to={'/allproducts'} className="text-sm font-medium text-gray-700">
+                    All Products
+                  </Link>
+                  <Link to={'/order'} className="text-sm font-medium text-gray-700">
+                    Order
+                  </Link>
+                  <Link to={'/dashboard'} className="text-sm font-medium text-gray-700">
+                    Admin
+                  </Link>
+                  <a className="text-sm font-medium text-gray-700 cursor-pointer">
+                    Logout
+                  </a>
+                </div>
+
+                <div className="hidden lg:ml-8 lg:flex">
+                  <a href="#" className="flex items-center text-gray-700">
+                    <img src="https://ecommerce-sk.vercel.app/img/indiaflag.png" alt="" className="block h-auto w-5 flex-shrink-0" />
+                    <span className="ml-3 block text-sm font-medium">INDIA</span>
+                  </a>
+                </div>
+                <div className="hidden lg:ml-8 lg:flex">
+                  <a href="#" className="flex items-center text-gray-700">
+                    <img
+                      className="inline-block w-10 h-10 rounded-full"
+                      src="https://overreacted.io/static/profile-pic-c715447ce38098828758e525a1128b87.jpg"
+                      alt="Dan_Abromov"
+                    />
+                  </a>
+                </div>
+
+                <div className="flex lg:ml-6">
+                  <button className='' onClick={toggleMode}>
+                    {mode === 'light' ?
+                      (<FiSun className='' size={30} />
+                      ) : mode === 'dark' ?
+                        (<BsFillCloudSunFill size={30} />
+                        ) : ''}
+                  </button>
+                </div>
+
+                <div className="ml-4 flow-root lg:ml-6">
+                  <Link to={'/cart'} className="group -m-2 flex items-center p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                    </svg>
+                    <span className="ml-2 text-sm font-medium text-gray-700">0</span>
+                    <span className="sr-only">items in cart, view bag</span>
+                  </Link>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+    </div>
+  )
+}
+
+export default Navbar;
+
+.header {
+    position: relative;
+    background-color: #fff;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .justify-center {
+    justify-content: center;
+  }bg
+  
+  .bg-pink-600 {
+    background-color: fuchsia;
+  }
+  
+  .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .text-sm {
+    font-size: 0.875rem;
+  }
+  
+  .font-medium {
+    font-weight: 500;
+  }
+  
+  .text-white {
+    color: #fff;
+  }
+  
+  .sm\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  
+  .lg\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  nav[aria-label="Top"] {
+    margin-top: 1.5rem;
+  }
+  
+  .shadow-xl {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .hidden {
+    display: none !important;
+  }
+  
+  .block {
+    display: block;
+  }
+  
+  .ml-4 {
+    margin-left: 1rem;
+  }
+  
+  .ml-auto {
+    margin-left: auto;
+  }
+  
+  .ml-8 {
+    margin-left: 2rem;
+  }
+  
+  .ml-6 {
+    margin-left: 1.5rem;
+  }
+  
+  .flow-root {
+    display: flow-root;
+  }
+  
+  .group {
+    position: relative;
+  }
